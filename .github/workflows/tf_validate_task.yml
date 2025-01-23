@@ -30,7 +30,7 @@ on:
 jobs:
   validate:
     name: Validate Terraform
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     environment: ${{ inputs.gh_environment }}
     steps:
       - name: Checkout Code
