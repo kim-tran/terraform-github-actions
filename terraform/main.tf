@@ -25,7 +25,7 @@ resource "azurerm_subnet" "subnet_pep" {
 module "key_vault" {
   source = "../modules/tf-az-keyvault"
 
-  location            = locals.primary_region
+  location            = local.primary_region
   subnet_id           = azurerm_subnet.subnet_pep.id
   resource_group_name = data.azurerm_resource_group.rg.name
   environment_key     = "dev"
