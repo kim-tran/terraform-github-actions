@@ -22,17 +22,15 @@ resource "azurerm_subnet" "subnet_pep" {
   address_prefixes     = ["10.0.0.0/24"]
 }
 
-# module "key_vault" {
-#   source = "../modules/tf-az-keyvault"
-#   #   for_each = { for k, v in local.these : k => v }
-#   #   in       = each.value
+module "key_vault" {
+  source = "../modules/tf-az-keyvault"
 
-#   location  = locals.primary_region
-#   subnet_id = 
-#   resource_group_name = data.azurerm_resource_group.rg.name
-#   environment_key = "dev"
-#   tags = {
-#     "IaC" = "Terraform"
-#   }
-# }
+  location  = locals.primary_region
+  subnet_id = azurerm_subnet.subnet_pep.id
+  resource_group_name = data.azurerm_resource_group.rg.name
+  environment_key = "dev"
+  tags = {
+    "IaC" = "Terraform"
+  }
+}
 
