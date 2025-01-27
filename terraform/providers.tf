@@ -4,3 +4,8 @@ terraform {
     use_oidc         = true
   }
 }
+
+provider "azurerm" {
+  features {}
+  storage_use_azuread = true
+}
