@@ -35,6 +35,11 @@ variable "environment_key" {
   description = "The environment key for this Key Vault."
 }
 
+variable "unique_identifier" {
+  type = string
+  description = "Unique identifier to differentiate key vaults"
+}
+
 variable "subnet_id" {
   type        = string
   description = "The ID of the subnet in which to deploy the Private Endpoint for this Key Vault."

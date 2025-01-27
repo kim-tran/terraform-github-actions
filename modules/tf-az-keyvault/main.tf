@@ -1,5 +1,5 @@
 resource "azurerm_key_vault" "keyvault" {
-  name                          = "kv-${var.purpose_abbreviation}-${var.environment_key}"
+  name                          = "kv-${var.purpose_abbreviation}-${var.environment_key}-${var.unique_identifier}"
   location                      = var.location
   resource_group_name           = var.resource_group_name
   enabled_for_disk_encryption   = true

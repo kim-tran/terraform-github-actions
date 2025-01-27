@@ -29,6 +29,7 @@ module "key_vault" {
   subnet_id           = azurerm_subnet.subnet_pep.id
   resource_group_name = data.azurerm_resource_group.rg.name
   environment_key     = "dev"
+  unique_identifier   = "kitra"
   tags = {
     "IaC" = "Terraform"
   }
