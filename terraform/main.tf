@@ -1,5 +1,6 @@
 locals {
-  primary_region = "eastus"
+  primary_region   = "eastus"
+  secondary_region = "westus"
 }
 
 data "azurerm_resource_group" "rg" {
@@ -34,4 +35,48 @@ module "key_vault" {
     "IaC" = "Terraform"
   }
 }
+
+
+module "naming_kitra_dev_label" {
+  source = "../modules/tf-az-naming"
+
+  delimiter = "-"
+  namespace = "kitra"
+  stage     = "dev"
+
+  tags = {
+    "BusinessUnit" = "MCAPS",
+    "NamingLabel"  = "true"
+  }
+}
+
+module "naming_eastus_label" {
+  source = "../modules/tf-az-naming"
+
+  environment = "eastus"
+
+  # Copy all other fields from the base label
+  context = module.naming_kitra_dev_label
+}
+
+module "naming_westus_label" {
+  source = "../modules/tf-az-naming"
+
+  environment = "westus"
+
+  # Copy all other fields from the base label
+  context = module.naming_kitra_dev_label
+}
+
+
+resource "azurerm_resource_group" "eastus" {
+  name     = module.naming_eastus_label.resource_group
+  location = local.primary_region
+}
+
+resource "azurerm_resource_group" "westus" {
+  name     = module.naming_westus_label.resource_group
+  location = local.secondary_region
+}
+
 
