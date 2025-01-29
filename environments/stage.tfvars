@@ -1,1 +1,0 @@
-environment_variable = "environment_value_dev"

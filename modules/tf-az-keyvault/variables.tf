@@ -36,7 +36,7 @@ variable "environment_key" {
 }
 
 variable "unique_identifier" {
-  type = string
+  type        = string
   description = "Unique identifier to differentiate key vaults"
 }
 

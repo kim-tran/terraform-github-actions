@@ -1,0 +1,18 @@
+{
+  "description": "Azure Platform Terraform Ops Landing Zone",
+  "name": "TFOps",
+  "subscription_update_existing": false,
+  "subscription_id": "b2c5ab64-1473-483f-a839-ef88914ac0b8",
+  "subscription_management_group_association_enabled": false,
+  
+  "landingzone": "tf-ops",
+  "environment": "prod",
+  "locations": {
+    "primary": "westus2",
+    "secondary": "eastus2"
+  },
+  "network_watcher_resource_group_enabled": false,
+  "resource_groups": {},
+  "role_assignment_enabled": false,
+  "role_assignments": {}
+}

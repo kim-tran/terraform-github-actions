@@ -1,14 +1,24 @@
-variable "config_variable" {
+variable "landing_zones_folder" {
   type    = string
-  default = "default_value"
+  default = "production"
 }
 
-variable "pipeline_variable" {
+variable "subscription_billing_scope" {
   type    = string
-  default = "default_value"
+  default = "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}"
 }
 
-variable "environment_variable" {
-  type    = string
-  default = "default_value"
+variable "owners" {
+  type    = list(string)
+  default = []
+}
+
+# variable "deploy_ddos_protection" {
+#   type    = bool
+#   default = false
+# }
+
+variable "deploy_private_dns_zones" {
+  type    = bool
+  default = false
 }
