@@ -31,7 +31,3 @@ module "naming" {
     "BusinessUnit" = "MCAPS"
   }
 }
-
-output "naming" {
-  value = module.naming
-}
