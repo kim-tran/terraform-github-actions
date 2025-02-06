@@ -26,10 +26,6 @@ module "landing_zones" {
     address_space               = v.address_space
     resource_group_lock_enabled = try(v.resource_group_lock_enabled, false)
 
-    # # ddos protection plan
-    # ddos_protection_enabled = try(v.ddos_protection_enabled, false)
-    # ddos_protection_plan_id = azurerm_network_ddos_protection_plan.this[0].id
-
     hub_peering_enabled             = try(v.hub_peering_enabled, false)
     hub_peering_use_remote_gateways = try(v.hub_peering_enabled, false) ? try(v.hub_peering_use_remote_gateways, true) : false
     # hub_network_resource_id         = try(v.hub_peering_enabled, false) ? local.hub_network_resource_id : null

@@ -13,8 +13,8 @@
 #         resource_group_name             = split("/", v)[4]
 #         virtual_network_name            = split("/", v)[8]
 #         address_space                   = local.landing_zones[landing_zone].virtual_networks[k].address_space
-#         ddos_protection_enabled         = try(v.ddos_protection_enabled, null)
-#         ddos_protection_plan_id         = try(v.ddos_protection_plan_id, null)
+#         # ddos_protection_enabled         = try(v.ddos_protection_enabled, null)
+#         # ddos_protection_plan_id         = try(v.ddos_protection_plan_id, null)
 #         hub_peering_enabled             = try(v.hub_peering_enabled, null)
 #         hub_peering_use_remote_gateways = try(v.hub_peering_use_remote_gateways, null)
 #         hub_network_resource_id         = try(v.hub_network_resource_id, null)

@@ -18,32 +18,52 @@ jobs:
       # Checkout your code repository to scan
     - uses: actions/checkout@v3
 
-      # Run tfsec to scan Terraform files
-    - name: tfsec
-      uses: aquasecurity/tfsec-action@v1.0.0
-      with:
-        soft_fail: true
+    # Run Snyk to check for issues in Infrastructure as Code files
+    - name: Run Snyk to check for vulnerabilities in Infra as Code
+      uses: snyk/actions/iac@master
+      continue-on-error: true
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      # with:
+      #   # specify the paths to the configuration files and directories to target during the test. When no path is specified, the whole repository is scanned by default
+      #   file: your/kubernetes-manifest.yaml your/terraform/directory
+      #   # specify the severity threshold to choose to report on
+      #   args: --severity-threshold=high
+      #   # specify the scan mode when scanning Terraform Plan files
+      #   args: --scan=resource-changes
 
-      # Run analyzers
-    - name: Run Microsoft Security DevOps
-      uses: microsoft/security-devops-action@latest
-      id: msdo
+        # integrate with Github Code Scanning to show issues in the Github Security Tab, creating a sarif file
+    - name: Upload result to GitHub Code Scanning
+      uses: github/codeql-action/upload-sarif@v2
       with:
-        # config: string. Optional. A file path to an MSDO configuration file ('*.gdnconfig').
-        # policy: 'GitHub' | 'microsoft' | 'none'. Optional. The name of a well-known Microsoft policy. If no configuration file or list of tools is provided, the policy may instruct MSDO which tools to run. Default: GitHub.
-        # categories: string. Optional. A comma-separated list of analyzer categories to run. Values: 'code', 'artifacts', 'IaC', 'containers'. Example: 'IaC, containers'. Defaults to all.
-        # languages: string. Optional. A comma-separated list of languages to analyze. Example: 'javascript,typescript'. Defaults to all.
-        tools: 'iacfilescanner, trivy, terrascan, templateanalyzer' #Optional. A comma-separated list of analyzer tools to run. Values: 'bandit', 'binskim', 'checkov', 'eslint', 'templateanalyzer', 'terrascan', 'trivy'.
+        sarif_file: snyk.sarif   
 
-      # Upload alerts to the Security tab - required for MSDO results to appear in the codeQL security alerts tab on GitHub (Requires GHAS)
-    - name: Upload alerts to Security tab
-      uses: github/codeql-action/upload-sarif@v3
-      with:
-        sarif_file: ${{ steps.msdo.outputs.sarifFile }}
+    #   # Run tfsec to scan Terraform files
+    # - name: tfsec
+    #   uses: aquasecurity/tfsec-action@v1.0.0
+    #   with:
+    #     soft_fail: true
 
-      # Upload alerts file as a workflow artifact - required for MSDO results to appear in the codeQL security alerts tab on GitHub (Requires GHAS)
-    - name: Upload alerts file as a workflow artifact
-      uses: actions/upload-artifact@v3
-      with:  
-        name: alerts
-        path: ${{ steps.msdo.outputs.sarifFile }}
+    #   # Run analyzers
+    # - name: Run Microsoft Security DevOps
+    #   uses: microsoft/security-devops-action@latest
+    #   id: msdo
+    #   with:
+    #     # config: string. Optional. A file path to an MSDO configuration file ('*.gdnconfig').
+    #     # policy: 'GitHub' | 'microsoft' | 'none'. Optional. The name of a well-known Microsoft policy. If no configuration file or list of tools is provided, the policy may instruct MSDO which tools to run. Default: GitHub.
+    #     # categories: string. Optional. A comma-separated list of analyzer categories to run. Values: 'code', 'artifacts', 'IaC', 'containers'. Example: 'IaC, containers'. Defaults to all.
+    #     # languages: string. Optional. A comma-separated list of languages to analyze. Example: 'javascript,typescript'. Defaults to all.
+    #     tools: 'iacfilescanner, trivy, terrascan, templateanalyzer' #Optional. A comma-separated list of analyzer tools to run. Values: 'bandit', 'binskim', 'checkov', 'eslint', 'templateanalyzer', 'terrascan', 'trivy'.
+
+    #   # Upload alerts to the Security tab - required for MSDO results to appear in the codeQL security alerts tab on GitHub (Requires GHAS)
+    # - name: Upload alerts to Security tab
+    #   uses: github/codeql-action/upload-sarif@v3
+    #   with:
+    #     sarif_file: ${{ steps.msdo.outputs.sarifFile }}
+
+    #   # Upload alerts file as a workflow artifact - required for MSDO results to appear in the codeQL security alerts tab on GitHub (Requires GHAS)
+    # - name: Upload alerts file as a workflow artifact
+    #   uses: actions/upload-artifact@v3
+    #   with:  
+    #     name: alerts
+    #     path: ${{ steps.msdo.outputs.sarifFile }}
