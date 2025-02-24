@@ -24,8 +24,7 @@ module "naming" {
 
   namespace   = each.value.landingzone #project name
   stage       = each.value.environment #subscription type
-  name        = "kitra"                #app name
-  environment = each.value.location
+  environment = local.region_mapping[each.value.location]
 
   tags = {
     "BusinessUnit" = "MCAPS"

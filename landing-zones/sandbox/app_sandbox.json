@@ -6,10 +6,10 @@
   "subscription_management_group_association_enabled": false,
   
   "landingzone": "app",
-  "environment": "sandbox",
+  "environment": "sbx",
   "locations": {
     "primary": "westus2",
-    "secondary": "eastus2"
+    "secondary": "westcentralus"
   },
   "link_private_dns_zones": false,
   "virtual_networks": {

@@ -6,10 +6,10 @@
   "subscription_management_group_association_enabled": false,
   
   "landingzone": "tf-ops",
-  "environment": "prod",
+  "environment": "prd",
   "locations": {
     "primary": "westus2",
-    "secondary": "eastus2"
+    "secondary": "westcentralus"
   },
   "network_watcher_resource_group_enabled": false,
   "resource_groups": {},

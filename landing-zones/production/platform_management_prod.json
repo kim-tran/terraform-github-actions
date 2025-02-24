@@ -5,18 +5,18 @@
   "subscription_id": "b2c5ab64-1473-483f-a839-ef88914ac0b8",
   "subscription_management_group_association_enabled": false,
 
-  "landingzone": "management",
-  "environment": "prod",
+  "landingzone": "mgmt",
+  "environment": "prd",
   "locations": {
     "primary": "westus2",
-    "secondary": "eastus2"
+    "secondary": "westcentralus"
   },
   "network_watcher_resource_group_enabled": false,
   "virtual_networks": {
     "primary_001": {
       "resource_group_lock_enabled": false,
       "address_space": [
-        "10.0.1.0/24"
+        "10.0.0.0/16"
       ],
       "hub_peering_enabled": false,
       "hub_peering_use_remote_gateways": false

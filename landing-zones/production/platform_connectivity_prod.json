@@ -5,11 +5,11 @@
   "subscription_id": "b2c5ab64-1473-483f-a839-ef88914ac0b8",
   "subscription_management_group_association_enabled": false,
 
-  "landingzone": "connectivity",
-  "environment": "prod",
+  "landingzone": "ntwk",
+  "environment": "prd",
   "locations": {
     "primary": "westus2",
-    "secondary": "eastus2"
+    "secondary": "westcentralus"
   },
   "virtual_networks": {
     "primary_001": {

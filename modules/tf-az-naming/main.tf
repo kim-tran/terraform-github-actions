@@ -170,7 +170,8 @@ locals {
     k => format("%s%s%s", v, "-", local.id, )
   }
 
-  id_for_storage_account = format("%s%s", local.resource_codes["storage_account"], substr(sha256(local.id), 0, 24 - length(local.resource_codes["storage_account"])))
+  # id_for_storage_account = format("%s%s", local.resource_codes["storage_account"], substr(sha256(local.id), 0, 24 - length(local.resource_codes["storage_account"])))
+  id_for_storage_account = format("%s%s%s%s", local.resource_codes["storage_account"], local.namespace, local.stage, local.environment)
   id_for_keyvault        = format("%s%s", local.resource_codes["key_vault"], substr(sha256(local.id), 0, 23 - length(local.resource_codes["key_vault"])))
 
   # Context of this label to pass to other label modules

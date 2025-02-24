@@ -5,6 +5,11 @@ locals {
     trimsuffix(landing_zone, ".json") => jsondecode(file("C:/Users/kitra/Documents/GitHub/terraform-github-actions/landing-zones/${var.landing_zones_folder}/${landing_zone}"))
   }
 
+  region_mapping = {
+    "westus2"       = "wus2"
+    "westcentralus" = "wcus",
+  }
+
   # hub_network_resource_id = ""
   nodes = merge([
     for k, v in local.landing_zones : {
@@ -17,8 +22,4 @@ locals {
       }
     }
   ]...)
-}
-
-output "landing_zones" {
-  value = local.landing_zones
 }
